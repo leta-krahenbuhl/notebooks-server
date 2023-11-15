@@ -26,4 +26,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (_req, res) => {
+  try {
+    const data = await knex("notebooks").select("title", "id", "date");
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving Notebooks: ${err}`);
+  }
+});
+
 module.exports = router;
