@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
-// const knex = require("knex")(require("../knexfile"));
-const knex = require("knex")({ client: "mysql2" });
+const knex = require("knex")(require("../knexfile"));
 router.use(express.json());
 
 router.post("/create", async (req, res) => {
@@ -16,8 +15,8 @@ router.post("/create", async (req, res) => {
   console.log(newEntry); //works with form
 
   try {
-    const result = await knex("notebooks").insert(newEntry);
-    const createdEntry = await knex("notebooks")
+    const result = await knex("journal_entry").insert(newEntry);
+    const createdEntry = await knex("journal_entry")
       .where({ id: result[0] })
       .first();
     res.status(201).send(createdEntry);
