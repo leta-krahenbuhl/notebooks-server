@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
-const knex = require("knex")(require("../knexfile"));
+// const knex = require("knex")(require("../knexfile"));
+const knex = require("knex")({ client: "mysql2" });
+router.use(express.json());
 
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
   //put back-end form validation here
 
   const newEntry = {
@@ -11,17 +13,19 @@ router.post("/", async (req, res) => {
     text: req.body.text,
   };
 
-  console.log(newWarehouse);
+  console.log(newEntry); //works with form
 
   try {
-    const result = await knex("warehouses").insert(newWarehouse);
-    const createdWarehouse = await knex("warehouses")
+    const result = await knex("notebooks").insert(newEntry);
+    const createdEntry = await knex("notebooks")
       .where({ id: result[0] })
       .first();
-    res.status(201).send(createdWarehouse);
+    res.status(201).send(createdEntry);
   } catch (error) {
     res.status(500).json({
-      message: `Unable to add new warehouse: ${error}`,
+      message: `Unable to add new journal entry: ${error}`,
     });
   }
 });
+
+module.exports = router;
