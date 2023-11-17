@@ -3,18 +3,17 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("journal_entry", (table) => {
+  return knex.schema.createTable("list_items", (table) => {
     table.increments("id").primary();
-    table.timestamp("date").defaultTo(knex.fn.now());
-    table.string("title").notNullable();
     table.string("text").notNullable();
+    table.string("done").notNullable();
     table
-      .integer("notebook_id")
+      .integer("list_id")
       .unsigned()
-      .references("notebooks.id")
+      .references("lists.id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE")
-      .defaultTo(4);
+      .defaultTo(1);
   });
 };
 
@@ -22,6 +21,4 @@ exports.up = function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function (knex) {
-  return knex.schema.dropTable("journal_entry");
-};
+exports.down = function (knex) {};

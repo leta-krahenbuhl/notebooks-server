@@ -35,4 +35,27 @@ router.get("/", async (_req, res) => {
   }
 });
 
+router.route("/:notebook-id").get(async (req, res) => {
+  try {
+    const entriesOfThatNotebook = await knex("entries")
+      .where({
+        notebook_id: req.params.id,
+        //need to set up foreign key notebooke_id for entries...
+        // code below not looked at yet, just copied
+      })
+      .first();
+    if (singleDetail.length === 0) {
+      return res.status(404).json({
+        message: `Notebook with ID ${req.params.id} not found`,
+      });
+    }
+
+    res.status(200).send(singleDetail);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to retrieve for single detail with ID ${req.params.id}`,
+    });
+  }
+});
+
 module.exports = router;
