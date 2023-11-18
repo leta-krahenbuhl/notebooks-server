@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
 
   const newListItem = {
     text: req.body.text,
+    list_id: req.body.list_id,
   };
 
   try {

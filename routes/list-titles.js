@@ -4,6 +4,20 @@ require("dotenv").config();
 const knex = require("knex")(require("../knexfile"));
 router.use(express.json());
 
+router.get("/", async (_req, res) => {
+  try {
+    const data = await knex("list_titles").select(
+      "id",
+      "date",
+      "title",
+      "notebook_id"
+    );
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving list titles: ${err}`);
+  }
+});
+
 router.post("/", async (req, res) => {
   //put back-end form validation here
 
