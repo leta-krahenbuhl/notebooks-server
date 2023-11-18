@@ -11,7 +11,8 @@ router.post("/", async (req, res) => {
     title: req.body.title,
   };
 
-  //   console.log(req.body.title); // works
+  console.log(req.body.title); // works
+  // says list_titles db doesn't exist.. can't get it to show up in workbench
 
   try {
     const result = await knex("list_titles").insert(newListTitle);

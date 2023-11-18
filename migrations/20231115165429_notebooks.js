@@ -3,10 +3,14 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("notebooks", (table) => {
-    table.increments("id").primary();
-    table.timestamp("date").defaultTo(knex.fn.now());
-    table.string("title").notNullable();
+  return knex.schema.hasTable("notebooks").then(function (exists) {
+    if (!exists) {
+      return knex.schema.createTable("notebooks", (table) => {
+        table.increments("id").primary();
+        table.timestamp("date").defaultTo(knex.fn.now());
+        table.string("title").notNullable();
+      });
+    }
   });
 };
 
