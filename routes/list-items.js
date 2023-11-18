@@ -1,25 +1,24 @@
 const express = require("express");
 const router = express.Router();
-require("dotenv").config();
 const knex = require("knex")(require("../knexfile"));
-router.use(express.json());
+router.use(express.json()); // do I need this?
 
 router.post("/", async (req, res) => {
   //put back-end form validation here
 
-  const newListTitle = {
-    title: req.body.title,
+  const newListItem = {
+    text: req.body.text,
   };
 
   try {
-    const result = await knex("list_titles").insert(newListTitle);
-    const createdTitle = await knex("list_titles")
+    const result = await knex("list_items").insert(newListItem);
+    const createdItem = await knex("list_items")
       .where({ id: result[0] })
       .first();
-    res.status(201).send(createdTitle);
+    res.status(201).send(createdItem);
   } catch (error) {
     res.status(500).json({
-      message: `Unable to add new list title: ${error}`,
+      message: `Unable to add new list item: ${error}`,
     });
   }
 });

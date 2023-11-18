@@ -6,7 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("list_items", (table) => {
     table.increments("id").primary();
     table.string("text").notNullable();
-    table.string("done").notNullable();
+    table.boolean("done").notNullable().defaultTo(false);
     table
       .integer("list_id")
       .unsigned()
@@ -21,4 +21,6 @@ exports.up = function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function (knex) {};
+exports.down = function (knex) {
+  return knex.schema.dropTable("list_items");
+};
