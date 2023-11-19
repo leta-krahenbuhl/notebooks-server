@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
 
   const newListTitle = {
     title: req.body.title,
+    notebook_id: req.body.notebook_id,
   };
 
   try {
