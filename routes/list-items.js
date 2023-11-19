@@ -24,4 +24,18 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (_req, res) => {
+  try {
+    const data = await knex("list_items").select(
+      "id",
+      "text",
+      "done",
+      "list_id"
+    );
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving list items: ${err}`);
+  }
+});
+
 module.exports = router;
