@@ -38,7 +38,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/done", async (req, res) => {
   try {
     const item = await knex("list_items").where({
       id: req.body.id,
@@ -51,6 +51,29 @@ router.put("/", async (req, res) => {
     const result = await knex("list_items")
       .where({ id: req.body.id })
       .update(updateDone);
+
+    const response = await knex("list_items")
+      .select("id", "text", "done", "list_id")
+      .where({ id: req.body.id });
+    res.status(200).json(response);
+  } catch {
+    res.status(500).send(`Unable to edit inventory item: ${error}`);
+  }
+});
+
+router.put("/", async (req, res) => {
+  try {
+    const item = await knex("list_items").where({
+      id: req.body.id,
+    });
+
+    const updateItemText = {
+      text: req.body.text,
+    };
+
+    const result = await knex("list_items")
+      .where({ id: req.body.id })
+      .update(updateItemText);
 
     const response = await knex("list_items")
       .select("id", "text", "done", "list_id")

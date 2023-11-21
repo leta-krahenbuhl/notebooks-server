@@ -39,4 +39,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  try {
+    // const item = await knex("list_titles").where({
+    //   id: req.body.id,
+    // });
+
+    const updateTitle = {
+      title: req.body.title,
+    };
+
+    const result = await knex("list_titles")
+      .where({ id: req.body.id })
+      .update(updateTitle);
+
+    const response = await knex("list_titles")
+      .select("id", "date", "title", "notebook_id")
+      .where({ id: req.body.id });
+    res.status(200).json(response);
+  } catch {
+    res.status(500).send(`Unable to edit inventory item: ${error}`);
+  }
+});
+
 module.exports = router;
