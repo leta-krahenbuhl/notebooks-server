@@ -84,17 +84,24 @@ router.put("/", async (req, res) => {
   }
 });
 
-//   try {
-//     const data = await knex("list_items").select(
-//       "id",
-//       "text",
-//       "done",
-//       "list_id"
-//     );
-//     res.status(200).json(data);
-//   } catch (err) {
-//     res.status(400).send(`Error retrieving list items: ${err}`);
-//   }
-// });
+router.delete("/", async (req, res) => {
+  try {
+    const result = await knex("list_items")
+      .where({ id: req.body.itemId })
+      .del();
+
+    if (result === 0) {
+      return res.status(404).json({
+        message: `List item with ID ${req.body.itemId} not found`,
+      });
+    }
+
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to delete list item: ${error}`,
+    });
+  }
+});
 
 module.exports = router;
