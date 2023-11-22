@@ -53,4 +53,25 @@ router.delete("/", async (req, res) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  try {
+    console.log(req.body.title);
+    const updateTitle = {
+      title: req.body.title,
+    };
+
+    const result = await knex("notebooks")
+      .where({ id: req.body.id })
+      .update(updateTitle);
+
+    const response = await knex("notebooks")
+      .select("id", "date", "title")
+      .where({ id: req.body.id });
+
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).send(`Unable to edit notebook title: ${error}`);
+  }
+});
+
 module.exports = router;

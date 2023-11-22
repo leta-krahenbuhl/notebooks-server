@@ -41,10 +41,6 @@ router.post("/", async (req, res) => {
 
 router.put("/", async (req, res) => {
   try {
-    // const item = await knex("list_titles").where({
-    //   id: req.body.id,
-    // });
-
     const updateTitle = {
       title: req.body.title,
     };
