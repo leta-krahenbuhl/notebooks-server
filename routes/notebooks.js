@@ -5,13 +5,15 @@ const knex = require("knex")(require("../knexfile"));
 router.use(express.json());
 
 router.post("/", async (req, res) => {
-  //put back-end form validation here
+  if (!req.body.title) {
+    return res.status(400).json({
+      message: "Please make sure title field is filled out.",
+    });
+  }
 
   const newNotebook = {
     title: req.body.title,
   };
-
-  // console.log(newNotebook); //works with form
 
   try {
     const result = await knex("notebooks").insert(newNotebook);
@@ -54,8 +56,14 @@ router.delete("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
+  if (req.body.id) {
+    return res.status(404).send("Please remove the ID from the request");
+  }
+  if (!req.body.title) {
+    return res.status(404).send("Please add a title");
+  }
+
   try {
-    console.log(req.body.title);
     const updateTitle = {
       title: req.body.title,
     };
