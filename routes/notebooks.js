@@ -56,9 +56,6 @@ router.delete("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-  if (req.body.id) {
-    return res.status(404).send("Please remove the ID from the request");
-  }
   if (!req.body.title) {
     return res.status(404).send("Please add a title");
   }
