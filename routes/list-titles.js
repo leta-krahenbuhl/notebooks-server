@@ -19,7 +19,17 @@ router.get("/", async (_req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  //put back-end form validation here
+  if (!req.body.title) {
+    return res.status(400).json({
+      message: "Please make sure title field is filled out.",
+    });
+  }
+
+  if (!req.body.notebook_id) {
+    return res.status(400).json({
+      message: "No notebook_id provided.",
+    });
+  }
 
   const newListTitle = {
     title: req.body.title,
@@ -40,6 +50,10 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
+  if (!req.body.title) {
+    return res.status(404).send("Please add a title.");
+  }
+
   try {
     const updateTitle = {
       title: req.body.title,

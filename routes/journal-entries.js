@@ -12,8 +12,6 @@ router.post("/create", async (req, res) => {
     text: req.body.text,
   };
 
-  console.log(newEntry); //works with form
-
   try {
     const result = await knex("journal_entry").insert(newEntry);
     const createdEntry = await knex("journal_entry")

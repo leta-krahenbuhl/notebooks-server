@@ -4,7 +4,17 @@ const knex = require("knex")(require("../knexfile"));
 router.use(express.json()); // do I need this?
 
 router.post("/", async (req, res) => {
-  //put back-end form validation here
+  if (!req.body.text) {
+    return res.status(400).json({
+      message: "Please make sure text field is filled out.",
+    });
+  }
+
+  if (!req.body.list_id) {
+    return res.status(400).json({
+      message: `No list_id provided.`,
+    });
+  }
 
   const newListItem = {
     text: req.body.text,
@@ -62,6 +72,10 @@ router.put("/done", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
+  if (!req.body.text) {
+    return res.status(404).send("Text field cannot be left empty.");
+  }
+
   try {
     const item = await knex("list_items").where({
       id: req.body.id,
