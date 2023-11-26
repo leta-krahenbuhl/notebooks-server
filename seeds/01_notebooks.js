@@ -19,17 +19,12 @@ exports.seed = async function (knex) {
     {
       id: 3,
       date: "2021-11-15 17:50:10",
-      title: "Books to read",
+      title: "To Check Out",
     },
     {
       id: 4,
       date: "2020-11-15 17:50:10",
-      title: "Random lists",
-    },
-    {
-      id: 5,
-      date: "2019-11-15 17:50:10",
-      title: "2023",
+      title: "Some Random Lists",
     },
   ]);
 };

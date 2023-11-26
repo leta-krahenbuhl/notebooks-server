@@ -9,7 +9,7 @@ exports.seed = async function (knex) {
     {
       id: 1,
       date: "2023-11-15 17:50:11",
-      title: "Urgent",
+      title: "Urgent!",
       notebook_id: 1,
     },
     {
@@ -45,26 +45,26 @@ exports.seed = async function (knex) {
     {
       id: 8,
       date: "2016-11-15 17:50:10",
-      title: "A terrible kindness",
+      title: "Books to read",
       notebook_id: 3,
     },
     {
       id: 9,
       date: "2015-11-15 17:50:10",
-      title: "All the light we cannot see",
+      title: "Movies to watch",
       notebook_id: 3,
     },
     {
       id: 10,
       date: "2014-11-15 17:50:10",
-      title: "Small pleasures",
+      title: "Series to watch",
       notebook_id: 3,
     },
     {
       id: 11,
       date: "2013-11-15 17:50:10",
-      title: "Milkman",
-      notebook_id: 3,
+      title: "Aasdf",
+      notebook_id: 4,
     },
     {
       id: 12,
@@ -88,12 +88,6 @@ exports.seed = async function (knex) {
       id: 15,
       date: "2022-09-15 17:50:10",
       title: "Tadsfdfasdfadf",
-      notebook_id: 4,
-    },
-    {
-      id: 16,
-      date: "2021-08-15 17:50:10",
-      title: "Stuffs",
       notebook_id: 4,
     },
   ]);
