@@ -10,10 +10,10 @@ exports.up = function (knex) {
     table
       .integer("list_id")
       .unsigned()
-      .references("lists.id")
+      .references("id") // Explicitly reference the column without the table name prefix
+      .inTable("list_titles") // Explicitly specify the table name without relying on default resolution
       .onUpdate("CASCADE")
-      .onDelete("CASCADE")
-      .defaultTo(1);
+      .onDelete("CASCADE");
   });
 };
 
