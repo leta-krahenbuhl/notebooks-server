@@ -1,6 +1,6 @@
 # Overview: Notebooks
 
-- This is the back-end part of the notebooks project. It connects with the following back-end part: [https://github.com/leta-krahenbuhl/notebooks-server](https://github.com/leta-krahenbuhl/notebooks)
+- This is the back-end part of the notebooks project. It connects with the following front-end part: [https://github.com/leta-krahenbuhl/notebooks](https://github.com/leta-krahenbuhl/notebooks)
 - A to do list app where users can sort to do lists into notebooks
 - Software engineering diploma graduate project
 
