@@ -5,6 +5,8 @@ const cors = require("cors");
 const notebooksRoutes = require("./routes/notebooks");
 const ListTitleRoutes = require("./routes/list-titles");
 const ListItemRoutes = require("./routes/list-items");
+const trackerTitleRoutes = require("./routes/tracker-titles");
+
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -18,6 +20,7 @@ app.get("/", (req, res) => {
 app.use("/api/notebooks", notebooksRoutes);
 app.use("/api/list-titles", ListTitleRoutes);
 app.use("/api/list-items", ListItemRoutes);
+app.use("/api/tracker-titles", trackerTitleRoutes);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
