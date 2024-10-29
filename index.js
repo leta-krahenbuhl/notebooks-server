@@ -6,6 +6,7 @@ const notebooksRoutes = require("./routes/notebooks");
 const ListTitleRoutes = require("./routes/list-titles");
 const ListItemRoutes = require("./routes/list-items");
 const trackerTitleRoutes = require("./routes/tracker-titles");
+const habitRoutes = require("./routes/habits");
 
 const dotenv = require("dotenv");
 
@@ -21,6 +22,7 @@ app.use("/api/notebooks", notebooksRoutes);
 app.use("/api/list-titles", ListTitleRoutes);
 app.use("/api/list-items", ListItemRoutes);
 app.use("/api/tracker-titles", trackerTitleRoutes);
+app.use("/api/habits", habitRoutes);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
