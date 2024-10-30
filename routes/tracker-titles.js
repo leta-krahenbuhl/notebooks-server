@@ -85,4 +85,35 @@ router.delete("/", async (req, res) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  if (!req.body.title) {
+    return res.status(404).send("Please add a title.");
+  }
+
+  try {
+    const updateTitle = {
+      title: req.body.title,
+    };
+
+    const result = await knex("tracker_titles")
+      .where({ id: req.body.id })
+      .update(updateTitle);
+
+    if (result === 0) {
+      return res.status(404).json({
+        message: `Tracker with ID ${req.body.id} not found`,
+      });
+    }
+
+    const response = await knex("tracker_titles")
+      .select("id", "date", "title", "notebook_id")
+      .where({ id: req.body.id })
+      .first(); // Use .first() to return a single object instead of an array
+
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).send(`Unable to edit tracker title: ${error.message}`);
+  }
+});
+
 module.exports = router;

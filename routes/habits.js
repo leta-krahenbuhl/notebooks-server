@@ -45,7 +45,6 @@ router.get("/", async (_req, res) => {
       "circles_undone",
       "tracker_id"
     );
-    console.log("data: ", data);
     res.status(200).json(data);
   } catch (err) {
     res.status(400).send(`Error retrieving habits: ${err}`);
